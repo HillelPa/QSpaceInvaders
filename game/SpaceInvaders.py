@@ -135,7 +135,6 @@ class SpaceInvaders():
         closest_invader_X = self.invader_X[closest_invader_index]
         closest_invader_Y = self.invader_Y[closest_invader_index]
         if closest_invader_Y >= 600:
-            print("ICI")
             closest_invader_Y = 599
 
         # Position du missile
