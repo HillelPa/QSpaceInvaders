@@ -9,6 +9,6 @@ class RandomAgent():
     def __init__(self, num_actions):
         self.num_actions = num_actions
 
-    def select_action(self, _):
-        pygame.event.get()
+    def select_action(self):
+        #pygame.event.get()
         return np.random.randint(self.num_actions)

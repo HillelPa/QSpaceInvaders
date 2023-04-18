@@ -31,8 +31,8 @@ def main():
         state = game.reset()
         is_done = False
         while not is_done:
-            action = controller.select_action(state)
-            state, reward, is_done = game.step(action)
+            action = controller.select_action()
+            is_done = game.step(action)
             sleep(0.0001)
         if game.score_val > target_score :
             wins += 1
