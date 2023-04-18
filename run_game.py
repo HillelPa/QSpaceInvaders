@@ -17,6 +17,7 @@ def main():
     episodes = args.episodes
     target_score = args.target_score
     no_invaders = args.nb_invaders
+    print(f"Episodes : {episodes} target_score : {target_score}, no_invaders : {no_invaders}")
 
     freq_save = 10000
 
