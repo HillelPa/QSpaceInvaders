@@ -23,7 +23,7 @@ class QAgent:
 
 
     def select_action(self, state):
-        #pygame.event.get()
+        pygame.event.get()
         if random.uniform(0, 1) < self.epsilon:
             return np.random.randint(self.n_actions)
         else:

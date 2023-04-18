@@ -134,7 +134,7 @@ class SpaceInvaders():
         # Récupérer les coordonnées X et Y de l'alien le plus proche
         closest_invader_X = self.invader_X[closest_invader_index]
         closest_invader_Y = self.invader_Y[closest_invader_index]
-        if closest_invader_Y == 600:
+        if closest_invader_Y >= 600:
             print("ICI")
             closest_invader_Y = 599
 
@@ -158,8 +158,8 @@ class SpaceInvaders():
         reduced_iY = int(closest_invader_Y/self.factor)
         reduced_bX = int(bullet_X/self.factor)
         reduced_bY = int(bullet_Y/self.factor)
-        print(f"AVANT RED 1 : {player_X}, 2 : {closest_invader_X}, 3 : {closest_invader_Y}, 4 : {bullet_X}, 5 : {bullet_Y}")
-        print(f"1 : {reduced_pX}, 2 : {reduced_iX}, 3 : {reduced_iY}, 4 : {reduced_bX}, 5 : {reduced_bY}")
+        #print(f"AVANT RED 1 : {player_X}, 2 : {closest_invader_X}, 3 : {closest_invader_Y}, 4 : {bullet_X}, 5 : {bullet_Y}")
+        #print(f"1 : {reduced_pX}, 2 : {reduced_iX}, 3 : {reduced_iY}, 4 : {reduced_bX}, 5 : {reduced_bY}")
         return (reduced_pX, reduced_iX, reduced_iY, reduced_bX, reduced_bY, bullet_state)
 
     def reset(self):
