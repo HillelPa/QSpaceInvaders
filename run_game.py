@@ -21,12 +21,12 @@ def main():
     freq_save = 10000
 
     print("Start Learning")
-    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=False)
+    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=True)
     factor = game.factor
     reduced_width = int(game.screen_width/factor)
     reduced_height = int(game.screen_height/factor)
 
-    dimensions = (reduced_width, reduced_width, reduced_height, 2)
+    dimensions = (reduced_width, reduced_width, reduced_height, reduced_width, reduced_height, 2)
 
     controller = QAgent(dimensions, factor)
 

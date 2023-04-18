@@ -25,7 +25,7 @@ class SpaceInvaders():
     def __init__(self, target_score, no_invaders, display : bool = False, factor = 100):
 
         # Commenter sur mac
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
+        #os.environ["SDL_VIDEODRIVER"] = "dummy"
         
         # player
         self.display = display
@@ -104,8 +104,10 @@ class SpaceInvaders():
         # Stratégie 1 : renvoyé une version réduite des positions de la grille 
         # Position = 543 renvoi 54 si la facteur est de 10
 
+
         # Position du joueur : 
         player_X = self.get_player_X()
+        player_Y = self.get_player_Y()
 
         # Alien le plus bas :
         """
@@ -118,9 +120,26 @@ class SpaceInvaders():
         """
 
         # Alien le plus proche sur l'axe des X 
+        """
         closest_invader_X = min(self.invader_X, key=lambda x: abs(x - player_X))
         closest_invader_index = self.invader_X.index(closest_invader_X)
         closest_invader_Y = self.invader_Y[closest_invader_index]
+        """
+
+        # Alien le plus proche
+        distance_invaders = np.sqrt((np.array(self.invader_X) - player_X)**2 + (np.array(self.invader_Y) - player_Y)**2)
+        # Trouver l'indice de l'alien avec la distance la plus courte
+        closest_invader_index = np.argmin(distance_invaders)
+
+        # Récupérer les coordonnées X et Y de l'alien le plus proche
+        closest_invader_X = self.invader_X[closest_invader_index]
+        closest_invader_Y = self.invader_Y[closest_invader_index]
+
+        # Position du missile
+        bullet_X = self.get_bullet_X()
+        bullet_Y = self.get_bullet_Y()
+        if bullet_Y == 600:
+            bullet_Y = 0
 
         # Etat du shooter :
         bullet_state = self.get_bullet_state()
@@ -129,13 +148,15 @@ class SpaceInvaders():
         else :
             bullet_state = 1
         
-        # Tuple d'etat : (reduced_pX, reduced_iX, reduced_iY, bullet_state)
-        # Nombre d'etat possible = (800 * 800 * 600 * 2 / (factor^3))
+        # Tuple d'etat : (reduced_pX, reduced_iX, reduced_iY, reduced_bullet_X, reduced_bullet_Y, bullet_state)
+        # Nombre d'etat possible = (800 * 800 * 600 * * 800 * 600 2 / (factor^5))
         reduced_pX = int(player_X/self.factor)
         reduced_iX = int(closest_invader_X/self.factor)
         reduced_iY = int(closest_invader_Y/self.factor)
+        reduced_bX = int(bullet_X/self.factor)
+        reduced_bY = int(bullet_Y/self.factor)
 
-        return (reduced_pX, reduced_iX, reduced_iY, bullet_state)
+        return (reduced_pX, reduced_iX, reduced_iY, reduced_bX, reduced_bY, bullet_state)
 
     def reset(self):
         """Reset the game at the initial state.
