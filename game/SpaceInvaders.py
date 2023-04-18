@@ -25,7 +25,7 @@ class SpaceInvaders():
     def __init__(self, target_score, no_invaders, display : bool = False, factor = 100):
 
         # Commenter sur mac
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
+        #os.environ["SDL_VIDEODRIVER"] = "dummy"
         
         # player
         self.display = display
@@ -134,6 +134,9 @@ class SpaceInvaders():
         # Récupérer les coordonnées X et Y de l'alien le plus proche
         closest_invader_X = self.invader_X[closest_invader_index]
         closest_invader_Y = self.invader_Y[closest_invader_index]
+        if closest_invader_Y == 600:
+            print("ICI")
+            closest_invader_Y = 599
 
         # Position du missile
         bullet_X = self.get_bullet_X()
