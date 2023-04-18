@@ -3,6 +3,7 @@ from game.SpaceInvaders import SpaceInvaders
 from controller.random_agent import RandomAgent
 import argparse
 import csv
+import sys
 
 def main():
     print("Start")
@@ -20,15 +21,13 @@ def main():
     freq_save = 1000
 
     print("start temoin")
-    game = SpaceInvaders(target_score= target_score, no_invaders=no_invaders, display=False)
+    game = SpaceInvaders(target_score= target_score, no_invaders=no_invaders, display=True)
     controller = RandomAgent(game.na)
     wins = 0
     looses = 0
     print("Lancement de ", episodes, "episodes")
     print("____________________________________________________________________________________________________")
     for i in range(episodes):
-        if i % (episodes/100) == 0:
-            print("|", end="")
         state = game.reset()
         is_done = False
         while not is_done:
@@ -39,6 +38,11 @@ def main():
             wins += 1
         else :
             looses += 1
+        #print("i =", i)
+        #print("i % (episodes/100) =", i % (episodes/100))
+        if i % (episodes/100) == 0:
+            sys.stdout.write("|")
+            sys.stdout.flush()
     
     win_rate = (wins*100)/(wins+looses)
     print()

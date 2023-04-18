@@ -23,7 +23,8 @@ class SpaceInvaders():
     NO_INVADERS = 7 # Nombre d'aliens  
     
     def __init__(self, target_score, no_invaders, display : bool = False, factor = 100):
-
+        
+        # Commenter sur mac
         os.environ["SDL_VIDEODRIVER"] = "dummy"
         
         # player
