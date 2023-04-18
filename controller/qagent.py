@@ -19,12 +19,11 @@ class QAgent:
         if os.path.exists("controller/qtables/qtable"+str(factor)+".npy"):
             self.qtable = np.load("controller/qtables/qtable"+str(factor)+".npy")
         else:
-            print("pas wouhou")
             self.qtable = np.zeros((dimensions[0], dimensions[1], dimensions[2], dimensions[3], n_actions))
-        #self.print_q_table()
+
 
     def select_action(self, state):
-        pygame.event.get()
+        #pygame.event.get()
         if random.uniform(0, 1) < self.epsilon:
             return np.random.randint(self.n_actions)
         else:
@@ -33,7 +32,7 @@ class QAgent:
 
     def learn(self, state, action, reward, next_state, done):
 
-       #print("ICI next_state")
+        #print("ICI next_state")
         #print(f"pX = {next_state[0]}, iX = {next_state[1]}, iY = {next_state[2]}, b_s = {next_state[3]}")
     
         q_values = self.qtable[state[0]][state[1]][state[2]][state[3]]
