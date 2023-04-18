@@ -17,12 +17,11 @@ def main():
     episodes = args.episodes
     target_score = args.target_score
     no_invaders = args.nb_invaders
-    print(f"Episodes : {episodes} target_score : {target_score}, no_invaders : {no_invaders}")
 
     freq_save = 10000
 
     print("Start Learning")
-    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=True)
+    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=False)
     factor = game.factor
     reduced_width = int(game.screen_width/factor)
     reduced_height = int(game.screen_height/factor)
@@ -34,9 +33,14 @@ def main():
 
     print("Lancement de ", episodes, "episodes")
     print("____________________________________________________________________________________________________")
+    
+    if episodes < 100:
+        dpercent = 1
+    else:
+        dpercent = episodes/100
 
     for i in range(episodes):
-        if i % (episodes/100) == 0:
+        if i % dpercent == 0:
             sys.stdout.write("|")
             sys.stdout.flush()
 
