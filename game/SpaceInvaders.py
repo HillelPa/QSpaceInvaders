@@ -5,6 +5,7 @@ from pygame import mixer
 import numpy as np
 import os
 from time import sleep
+import platform
 
 
 def getURL(filename):
@@ -25,7 +26,8 @@ class SpaceInvaders():
     def __init__(self, target_score, no_invaders, display : bool = False, factor = 100):
 
         # Commenter sur mac
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
+        if platform.system() == "Linux":
+            os.environ["SDL_VIDEODRIVER"] = "dummy"
         
         # player
         self.display = display
