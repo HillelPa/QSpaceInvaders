@@ -36,6 +36,10 @@ def main():
     print("____________________________________________________________________________________________________")
 
     for i in range(episodes):
+
+        if i == 2:
+            a = c[-1]
+            
         if i % (episodes/100) == 0:
             sys.stdout.write("|")
             sys.stdout.flush()
