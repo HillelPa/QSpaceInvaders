@@ -22,13 +22,16 @@ class SpaceInvaders():
 
     NO_INVADERS = 7 # Nombre d'aliens  
     
-    def __init__(self, target_score, display : bool = False, factor = 100):
+    def __init__(self, target_score, no_invaders, display : bool = False, factor = 100):
 
         # player
         self.display = display
         
         # nombre d'actions (left, right, fire, no_action)
         self.na = 4 
+
+        # maj du nombre d'aliens
+        self.NO_INVADERS = no_invaders
 
         # score de fin de partie :
         self.target_score = target_score
