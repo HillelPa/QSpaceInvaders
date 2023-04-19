@@ -13,7 +13,7 @@ def main():
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')
     parser.add_argument('nb_invaders', type=int, help="Nombre d'invaders")
     parser.add_argument('epsilon', type=float, help="Epsilon (Hyperargumment)")
-    parser.add_argument('test', type=bool, help="Est ce qu'on teste une partie")
+    parser.add_argument('test', type=int, help="Est ce qu'on teste une partie")
     args = parser.parse_args()      
 
     episodes = args.episodes
