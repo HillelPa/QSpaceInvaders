@@ -13,24 +13,26 @@ def main():
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')
     parser.add_argument('nb_invaders', type=int, help="Nombre d'invaders")
     parser.add_argument('epsilon', type=float, help="Epsilon (Hyperargumment)")
+    parser.add_argument('test', type=bool, help="Est ce qu'on teste une partie")
     args = parser.parse_args()      
 
     episodes = args.episodes
     target_score = args.target_score
     no_invaders = args.nb_invaders
     epsilon = args.epsilon
+    test = args.test
 
     freq_save = 10000
 
     print("Start Learning")
-    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=False)
+    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=test)
     factor = game.factor
     reduced_width = int(game.screen_width/factor)
     reduced_height = int(game.screen_height/factor)
 
     dimensions = (reduced_width, reduced_width, reduced_height, reduced_width, reduced_height, 2)
 
-    controller = QAgent(dimensions, factor, epsilon=epsilon)
+    controller = QAgent(dimensions, factor, test, epsilon=epsilon)
 
 
     print("Lancement de ", episodes, "episodes")

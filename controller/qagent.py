@@ -5,11 +5,12 @@ import pygame
 
 class QAgent:
     
-    def __init__(self, dimensions, factor, alpha=0.1, gamma=0.9, epsilon=0.3, n_actions=4):
+    def __init__(self, dimensions, factor, test, alpha=0.1, gamma=0.9, epsilon=0.3, n_actions=4):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
         self.n_actions = n_actions
+        self.test = test
 
         # Q table : tableau a 7 dimension, 1 etat = 6 premieres dimensions :
         # [player_X][invader_X][invader_Y][bullet_X][buller_Y][bullet_state]
@@ -23,7 +24,8 @@ class QAgent:
 
 
     def select_action(self, state):
-        #pygame.event.get()
+        if self.test :
+            pygame.event.get()
         if random.uniform(0, 1) < self.epsilon:
             return np.random.randint(self.n_actions)
         else:

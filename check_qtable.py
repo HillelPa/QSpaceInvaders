@@ -13,5 +13,5 @@ for i in range(len(qtable)):
                             for n in range(len(qtable[i][j][k][l][m])):
                                 print(f"pX : {i}, iX : {j}, iY : {k}, bX : {l}, bY : {m}, bS : {n}")
                                 for o in range(len(qtable[i][j][k][l][m][n])):
-                                    print("action : ", m, " = [",qtable[i][j][k][l][m][n][o], "]")
+                                    print("action : ", o, " = [",qtable[i][j][k][l][m][n][o], "]")
 

@@ -36,7 +36,7 @@ class SpaceInvaders():
         self.na = 4 
 
         #maj du NO_INVADERS
-        self.NO_INVADERS = no_invaders
+        SpaceInvaders.NO_INVADERS = no_invaders
 
         # score de fin de partie :
         self.target_score = target_score
