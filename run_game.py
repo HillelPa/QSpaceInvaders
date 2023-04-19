@@ -12,7 +12,7 @@ def main():
     parser.add_argument('episodes', type=int, help="Nombre d'episodes")
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')
     parser.add_argument('nb_invaders', type=int, help="Nombre d'invaders")
-    parser.add_argument('display', type=bool, help="Est ce qu'on affiche")
+    parser.add_argument('display', type=int, help="Est ce qu'on affiche")
     args = parser.parse_args()      
 
     episodes = args.episodes
@@ -21,6 +21,7 @@ def main():
     display = args.display
 
     print("start temoin")
+    print(display)
     game = SpaceInvaders(target_score= target_score, no_invaders=no_invaders, display=display)
     controller = RandomAgent(game.na, display)
     wins = 0
