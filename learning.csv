@@ -1,0 +1,2 @@
+Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
+5;10;1;0.1;0.9;0.4;80.0
