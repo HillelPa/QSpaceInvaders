@@ -102,42 +102,8 @@ class SpaceInvaders():
         return pygame.surfarray.array3d(self.screen)
 
     def get_state(self):
-        
-        # Stratégie 1 : renvoyé une version réduite des positions de la grille 
-        # Position = 543 renvoi 54 si la facteur est de 10
 
-        # Position du joueur : 
-        player_X = self.get_player_X()
-
-        # Alien le plus bas :
-        """
-        lowest_invader_index = np.argmax(self.invader_Y)
-        while self.invader_Y[lowest_invader_index] > 600:
-            lowest_invader_index = np.argmax(self.invader_Y)
-
-        lowest_invader_X = self.invader_X[lowest_invader_index]
-        lowest_invader_Y = self.invader_Y[lowest_invader_index]
-        """
-
-        # Alien le plus proche sur l'axe des X 
-        closest_invader_X = min(self.invader_X, key=lambda x: abs(x - player_X))
-        closest_invader_index = self.invader_X.index(closest_invader_X)
-        closest_invader_Y = self.invader_Y[closest_invader_index]
-
-        # Etat du shooter :
-        bullet_state = self.get_bullet_state()
-        if bullet_state == "rest" :
-            bullet_state = 0
-        else :
-            bullet_state = 1
-        
-        # Tuple d'etat : (reduced_pX, reduced_iX, reduced_iY, bullet_state)
-        # Nombre d'etat possible = (800 * 800 * 600 * 2 / (factor^3))
-        reduced_pX = int(player_X/self.factor)
-        reduced_iX = int(closest_invader_X/self.factor)
-        reduced_iY = int(closest_invader_Y/self.factor)
-
-        return (reduced_pX, reduced_iX, reduced_iY, bullet_state)
+        return "PAS DE STATE"
 
     def reset(self):
         """Reset the game at the initial state.
