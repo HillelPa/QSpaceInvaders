@@ -31,7 +31,7 @@ def main():
     freq_save = 10000
 
     print("Start Learning")
-    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=test)
+    game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=test, factor=50)
     factor = game.factor
     reduced_width = int(game.screen_width/factor)
     reduced_height = int(game.screen_height/factor)
