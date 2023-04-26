@@ -5,6 +5,7 @@ import numpy as np
 import argparse
 import sys
 import csv
+import datetime
 
 
 def main():
@@ -31,12 +32,14 @@ def main():
     freq_save = 10000
 
     print("Start Learning")
+
+    now = datetime.datetime.now()
     game = SpaceInvaders(target_score= target_score, no_invaders= no_invaders, display=test, factor=50)
     factor = game.factor
     reduced_width = int(game.screen_width/factor)
     reduced_height = int(game.screen_height/factor)
 
-    dimensions = (reduced_width, reduced_width, reduced_height, reduced_width, reduced_height, 2)
+    dimensions = (reduced_width, reduced_width, reduced_height)
 
     controller = QAgent(dimensions, factor, test, alpha=alpha, gamma=gamma, epsilon=epsilon)
 
@@ -62,9 +65,14 @@ def main():
         is_done = False
         while not is_done:
             action = controller.select_action(state)
+            if action == 3 :    # On shoot
+                last_shoot = game.get_state()
+            
             next_state, reward, is_done = game.step(action)
             if not is_done:
                 controller.learn(state, action, reward, next_state, is_done)
+                if reward == 1 :
+                    controller.nice_shot(last_shoot)
             state = next_state
             if n%freq_save == 0:
                 np.save('controller/qtables/qtable'+str(factor)+'.npy', controller.qtable)
@@ -86,8 +94,8 @@ def main():
         writer = csv.writer(file, delimiter=';')
         
         # ajout de la ligne a écrire dans le fichier
-        # Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
-        new_line = [episodes, target_score, no_invaders, alpha, gamma, epsilon, win_rate]
+        # Date; Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
+        new_line = [now, episodes, target_score, no_invaders, alpha, gamma, epsilon, win_rate]
         
         # ecriture de la ligne dans le fichier
         writer.writerow(new_line)

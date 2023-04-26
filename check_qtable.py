@@ -3,7 +3,7 @@ import numpy as np
 factor = 50
 
 qtable = np.load("controller/qtables/qtable"+str(factor)+".npy")
-"""
+
 for i in range(len(qtable)):
             for j in range(len(qtable[i])):
                 for k in range(len(qtable[i][j])):
@@ -14,6 +14,6 @@ for i in range(len(qtable)):
                                 print(f"pX : {i}, iX : {j}, iY : {k}, bX : {l}, bY : {m}, bS : {n}")
                                 for o in range(len(qtable[i][j][k][l][m][n])):
                                     print("action : ", o, " = [",qtable[i][j][k][l][m][n][o], "]")
-"""
+
 
 print("Table de taille : ", (len(qtable[0][0][0][0][0][0]) * len(qtable[0][0][0][0][0]) * len(qtable[0][0][0][0]) * len(qtable[0][0][0]) * len(qtable[0][0]) * len(qtable[0]) * len(qtable)))

@@ -12,10 +12,10 @@ def getURL(filename):
     return os.path.dirname(__file__) + "/" + filename
 
 #encodes action as integer : 
-#0 : gauche
-#1 : droite
-#2 : shoot
-#3 : pass
+#0 : pass
+#1 : gauche
+#2 : droite
+#3 : shoot
 
 #encodes state as np.array(np.array(pixels))
 
@@ -70,7 +70,7 @@ class SpaceInvaders():
         self.game_over_font = pygame.font.Font('freesansbold.ttf', 64)
 
         self.playerImage = pygame.image.load(getURL('data/spaceship.png'))
-        self.reset()
+        self.last_shoot = self.reset()
 
     
     def get_player_X(self) -> int:
@@ -106,27 +106,9 @@ class SpaceInvaders():
         # Stratégie 1 : renvoyé une version réduite des positions de la grille 
         # Position = 543 renvoi 54 si la facteur est de 10
 
-
         # Position du joueur : 
         player_X = self.get_player_X()
         player_Y = self.get_player_Y()
-
-        # Alien le plus bas :
-        """
-        lowest_invader_index = np.argmax(self.invader_Y)
-        while self.invader_Y[lowest_invader_index] > 600:
-            lowest_invader_index = np.argmax(self.invader_Y)
-
-        lowest_invader_X = self.invader_X[lowest_invader_index]
-        lowest_invader_Y = self.invader_Y[lowest_invader_index]
-        """
-
-        # Alien le plus proche sur l'axe des X 
-        """
-        closest_invader_X = min(self.invader_X, key=lambda x: abs(x - player_X))
-        closest_invader_index = self.invader_X.index(closest_invader_X)
-        closest_invader_Y = self.invader_Y[closest_invader_index]
-        """
 
         # Alien le plus proche
         distance_invaders = np.sqrt((np.array(self.invader_X) - player_X)**2 + (np.array(self.invader_Y) - player_Y)**2)
@@ -139,29 +121,14 @@ class SpaceInvaders():
         if closest_invader_Y >= 600:
             closest_invader_Y = 599
 
-        # Position du missile
-        bullet_X = self.get_bullet_X()
-        bullet_Y = self.get_bullet_Y()
-        if bullet_Y == 600:
-            bullet_Y = 0
-
-        # Etat du shooter :
-        bullet_state = self.get_bullet_state()
-        if bullet_state == "rest" :
-            bullet_state = 0
-        else :
-            bullet_state = 1
-        
         # Tuple d'etat : (reduced_pX, reduced_iX, reduced_iY, reduced_bullet_X, reduced_bullet_Y, bullet_state)
         # Nombre d'etat possible = (800 * 800 * 600 * * 800 * 600 2 / (factor^5))
         reduced_pX = int(player_X/self.factor)
         reduced_iX = int(closest_invader_X/self.factor)
         reduced_iY = int(closest_invader_Y/self.factor)
-        reduced_bX = int(bullet_X/self.factor)
-        reduced_bY = int(bullet_Y/self.factor)
-        #print(f"AVANT RED 1 : {player_X}, 2 : {closest_invader_X}, 3 : {closest_invader_Y}, 4 : {bullet_X}, 5 : {bullet_Y}")
-        #print(f"1 : {reduced_pX}, 2 : {reduced_iX}, 3 : {reduced_iY}, 4 : {reduced_bX}, 5 : {reduced_bY}")
-        return (reduced_pX, reduced_iX, reduced_iY, reduced_bX, reduced_bY, bullet_state)
+        #print(f"AVANT RED 1 : {player_X}, 2 : {closest_invader_X}, 3 : {closest_invader_Y}")
+        #print(f"1 : {reduced_pX}, 2 : {reduced_iX}, 3 : {reduced_iY})
+        return (reduced_pX, reduced_iX, reduced_iY)
 
     def reset(self):
         """Reset the game at the initial state.
@@ -211,17 +178,18 @@ class SpaceInvaders():
         # RGB
         self.screen.fill((0, 0, 0))
         # Controling the player movement from the arrow keys
-        if action == 0: # GO LEFT
+        if action == 1: # GO LEFT
             self.player_Xchange = -1.7
-        if action == 1: # GO RIGHT
+        if action == 2: # GO RIGHT
             self.player_Xchange = 1.7
-        if action == 2: # FIRE
+        if action == 3: # FIRE
             self.player_Xchange = 0
             # Fixing the change of direction of bullet
             if self.bullet_state is "rest":
                 self.bullet_X = self.player_X
                 self.move_bullet(self.bullet_X, self.bullet_Y)
-        if action == 3: # NO ACTION 
+
+        if action == 0: # NO ACTION 
             self.player_Xchange = 0
     
         # adding the change in the player position
@@ -244,7 +212,6 @@ class SpaceInvaders():
                 if abs(self.player_X-self.invader_X[i]) < 80:
                     for j in range(SpaceInvaders.NO_INVADERS):
                         self.invader_Y[j] = 2000
-                    reward = -5
                     is_done = True
                     break
                 
@@ -252,10 +219,11 @@ class SpaceInvaders():
                 self.invader_Xchange[i] *= -1
                 self.invader_Y[i] += self.invader_Ychange[i]
                 reward = -1
+                
             # Collision
             collision = self.isCollision(self.bullet_X, self.invader_X[i], self.bullet_Y, self.invader_Y[i])
             if collision:
-                reward = 3
+                reward = 4
                 self.score_val += 1
                 if self.score_val > self.target_score:
                     is_done = True
