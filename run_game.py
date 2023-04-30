@@ -5,13 +5,13 @@ import numpy as np
 import argparse
 import sys
 import csv
-import time
+import datetime
 
 
 def main():
     print("Start")
 
-    now = time.now()
+    now = datetime.datetime.now()
     parser = argparse.ArgumentParser(description='entrainement à spaceInvaders')
     parser.add_argument('episodes', type=int, help="Nombre d'episodes")
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')

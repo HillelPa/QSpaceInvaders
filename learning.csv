@@ -6,3 +6,4 @@ Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; wi
 
 CHANGEMENT DE RETRIBUTION DES RECOMPENSES ET RESET DE LA QTABLE
 Now; Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
+2023-04-30 15:43:24.368002;1;10;1;0.1;0.9;0.5;0.0
