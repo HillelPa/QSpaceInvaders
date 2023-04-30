@@ -17,7 +17,7 @@ def main():
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')
     parser.add_argument('nb_invaders', type=int, help="Nombre d'invaders")
     parser.add_argument('test', type=int, help="Est ce qu'on teste une partie")
-    parser.add_argument('--epsilon', default=0.1, type=float, help="Epsilon (Hyperargumment)")
+    parser.add_argument('--epsilon', default=1, type=float, help="Epsilon (Hyperargumment)")
     parser.add_argument('--alpha', default=0.1, type=float, help="Alpha (Hyperargumment)")
     parser.add_argument('--gamma', default=0.9, type=float, help="Gamma (Hyperargumment)")
 
