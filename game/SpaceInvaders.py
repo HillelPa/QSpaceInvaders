@@ -209,7 +209,7 @@ class SpaceInvaders():
         reward = 0
 
         # RGB
-        self.screen.fill((0, 0, 0))
+        if self.display : self.screen.fill((0, 0, 0))
         # Controling the player movement from the arrow keys
         if action == 0: # GO LEFT
             self.player_Xchange = -1.7
