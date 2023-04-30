@@ -5,7 +5,7 @@ import pygame
 
 class QAgent:
     
-    def __init__(self, dimensions, factor, test, alpha=0.1, gamma=0.9, epsilon=0.3, n_actions=4):
+    def __init__(self, dimensions, factor, test, alpha=1, gamma=0.9, epsilon=0.1, n_actions=4):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
