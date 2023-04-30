@@ -244,18 +244,16 @@ class SpaceInvaders():
                 if abs(self.player_X-self.invader_X[i]) < 80:
                     for j in range(SpaceInvaders.NO_INVADERS):
                         self.invader_Y[j] = 2000
-                    reward = -5
                     is_done = True
                     break
                 
             if self.invader_X[i] >= 735 or self.invader_X[i] <= 0:
                 self.invader_Xchange[i] *= -1
                 self.invader_Y[i] += self.invader_Ychange[i]
-                reward = -1
             # Collision
             collision = self.isCollision(self.bullet_X, self.invader_X[i], self.bullet_Y, self.invader_Y[i])
             if collision:
-                reward = 3
+                reward = 1
                 self.score_val += 1
                 if self.score_val > self.target_score:
                     is_done = True

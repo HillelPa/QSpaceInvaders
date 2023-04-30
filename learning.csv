@@ -3,3 +3,4 @@ Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; wi
 100;30;1;0.1;0.9;0.1;28.0
 1000;10;1;0.1;0.9;0.4;73.5
 1000;10;1;0.1;0.9;0.4;75.9
+CHANGEMENT DE RETRIBUTION DES RECOMPENSES ET RESET DE LA QTABLE
