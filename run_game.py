@@ -5,10 +5,13 @@ import numpy as np
 import argparse
 import sys
 import csv
+import time
 
 
 def main():
     print("Start")
+
+    now = time.now()
     parser = argparse.ArgumentParser(description='entrainement à spaceInvaders')
     parser.add_argument('episodes', type=int, help="Nombre d'episodes")
     parser.add_argument('target_score', type=int, help='Score pour gagner la partie')
@@ -86,8 +89,8 @@ def main():
         writer = csv.writer(file, delimiter=';')
         
         # ajout de la ligne a écrire dans le fichier
-        # Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
-        new_line = [episodes, target_score, no_invaders, alpha, gamma, epsilon, win_rate]
+        # Now, Nombre d'episode; score a atteindre; nombre d'aliens; alpha; gamma; espsilon; win_rate
+        new_line = [now, episodes, target_score, no_invaders, alpha, gamma, epsilon, win_rate]
         
         # ecriture de la ligne dans le fichier
         writer.writerow(new_line)
